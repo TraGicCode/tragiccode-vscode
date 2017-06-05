@@ -6,7 +6,8 @@ describe 'vscode' do
     let(:install_manifest) {
       <<-MANIFEST
           class { 'vscode':
-              package_ensure => 'present',
+              package_ensure      => 'present',
+              create_desktop_icon => false,
           }
         MANIFEST
     }

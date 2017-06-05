@@ -14,9 +14,9 @@ describe 'vscode::install' do
     })}
 
     it { should contain_package('visualstudiocode').with({
-        :ensure          => 'present',
-        :source          => 'C:\VSCodeSetup-1.12.2.exe',
-        :install_options => ['/verysilent'],
+        :ensure            => 'present',
+        :source            => 'C:\VSCodeSetup-1.12.2.exe',
+        :install_options   => ['/verysilent', '/mergetasks=!runCode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath'],
         :uninstall_options => ['/verysilent'],
     }).that_requires('File[C:\VSCodeSetup-1.12.2.exe]')}
 

@@ -8,4 +8,9 @@ class vscode::params {
     $vscode_download_absolute_path = 'C:\VSCodeSetup-1.12.2.exe'
     $disable_extensions = false
     $vscode_user_settings_file_absolute_path = "${facts[appdata]}\\Code\\User\\settings.json"
+    $create_desktop_icon = true
+    $create_quick_launch_icon = true
+    $create_context_menu_files = true
+    $create_context_menu_folders = true
+    $add_to_path = true
 }

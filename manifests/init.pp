@@ -48,6 +48,11 @@ class vscode(
   String $vscode_download_url = $vscode::params::vscode_download_url,
   Stdlib::Absolutepath $vscode_download_absolute_path = $vscode::params::vscode_download_absolute_path,
   Boolean $disable_extensions = $vscode::params::disable_extensions,
+  Boolean $create_desktop_icon = $vscode::params::create_desktop_icon,
+  Boolean $create_quick_launch_icon = $vscode::params::create_quick_launch_icon,
+  Boolean $create_context_menu_files = $vscode::params::create_context_menu_files,
+  Boolean $create_context_menu_folders = $vscode::params::create_context_menu_folders,
+  Boolean $add_to_path = $vscode::params::add_to_path,
 ) inherits vscode::params {
 
   contain vscode::install
