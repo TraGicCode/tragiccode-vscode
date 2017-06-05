@@ -42,7 +42,13 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class vscode {
+class vscode(
+  Enum['present', 'installed', 'absent'] $package_ensure = $vscode::params::package_ensure,
+  String $package_name = $vscode::params::package_name,
+  String $vscode_download_url = $vscode::params::vscode_download_url,
+  Stdlib::Absolutepath $vscode_download_absolute_path = $vscode::params::vscode_download_absolute_path,
+) inherits vscode::params {
 
+  contain vscode::install
 
 }
