@@ -13,7 +13,7 @@ describe 'vscode::install' do
         :source => 'https://az764295.vo.msecnd.net/stable/19222cdc84ce72202478ba1cec5cb557b71163de/VSCodeSetup-1.12.2.exe',
     })}
 
-    it { should contain_package('visualstudiocode').with({
+    it { should contain_package('Microsoft Visual Studio Code').with({
         :ensure            => 'present',
         :source            => 'C:\VSCodeSetup-1.12.2.exe',
         :install_options   => ['/verysilent', '/mergetasks=!runCode,desktopicon,quicklaunchicon,addcontextmenufiles,addcontextmenufolders,addtopath', { '/log' => 'C:\\VSCodeSetup-install.log', }],
