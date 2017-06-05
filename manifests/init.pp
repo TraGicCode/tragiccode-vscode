@@ -50,5 +50,9 @@ class vscode(
 ) inherits vscode::params {
 
   contain vscode::install
+  contain vscode::config
+
+  Class['vscode::install']
+  -> Class['vscode::config']
 
 }
