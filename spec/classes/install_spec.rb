@@ -1,6 +1,10 @@
 require 'spec_helper'
 describe 'vscode::install' do
+    
   context 'with default values for all parameters' do
+    let(:facts) {{
+      :appdata => 'C:\Users\tragiccode\AppData\Roaming', 
+    }}
     it { should contain_class('vscode') }
     it { should contain_class('vscode::install') }
 
@@ -18,7 +22,9 @@ describe 'vscode::install' do
   end
 
   context 'with ensure => absent' do
-    
+    let(:facts) {{
+      :appdata => 'C:\Users\tragiccode\AppData\Roaming', 
+    }}
     let(:params) {{
         :package_ensure => 'absent',
     }}
