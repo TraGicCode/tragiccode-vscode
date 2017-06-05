@@ -17,6 +17,7 @@ describe 'vscode::install' do
         :ensure          => 'present',
         :source          => 'C:\VSCodeSetup-1.12.2.exe',
         :install_options => ['/verysilent'],
+        :uninstall_options => ['/verysilent'],
     }).that_requires('File[C:\VSCodeSetup-1.12.2.exe]')}
 
   end

@@ -20,9 +20,10 @@ class vscode::install(
   }
 
   package { $package_name:
-    ensure          => $package_ensure,
-    source          => $vscode_download_absolute_path,
-    install_options => ['/verysilent'],
-    require         => File[$vscode_download_absolute_path],
+    ensure            => $package_ensure,
+    source            => $vscode_download_absolute_path,
+    install_options   => ['/verysilent'],
+    uninstall_options => ['/verysilent'],
+    require           => File[$vscode_download_absolute_path],
   }
 }
