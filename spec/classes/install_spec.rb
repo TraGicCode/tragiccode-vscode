@@ -3,7 +3,6 @@ describe 'vscode::install' do
   context 'with default values for all parameters' do
     it { should contain_class('vscode') }
     it { should contain_class('vscode::install') }
-    it { should contain_class('vscode::config').that_requires('Class[vscode::install]') }
 
     it { should contain_file('C:\VSCodeSetup-1.12.2.exe').with({
         :ensure => 'file',
@@ -11,8 +10,9 @@ describe 'vscode::install' do
     })}
 
     it { should contain_package('visualstudiocode').with({
-        :ensure => 'present',
-        :source => 'C:\VSCodeSetup-1.12.2.exe',
+        :ensure          => 'present',
+        :source          => 'C:\VSCodeSetup-1.12.2.exe',
+        :install_options => ['/verysilent'],
     }).that_requires('File[C:\VSCodeSetup-1.12.2.exe]')}
 
   end

@@ -47,6 +47,7 @@ class vscode(
   String $package_name = $vscode::params::package_name,
   String $vscode_download_url = $vscode::params::vscode_download_url,
   Stdlib::Absolutepath $vscode_download_absolute_path = $vscode::params::vscode_download_absolute_path,
+  Boolean $disable_extensions = $vscode::params::disable_extensions,
 ) inherits vscode::params {
 
   contain vscode::install

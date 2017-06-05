@@ -14,14 +14,15 @@ class vscode::install(
     default     => 'absent',
   }
 
-  file { $::vscode::vscode_download_absolute_path:
+  file { $vscode_download_absolute_path:
     ensure => $file_ensure,
-    source => $::vscode::vscode_download_url,
+    source => $vscode_download_url,
   }
 
-  package { $::vscode::package_name:
-    ensure  => $package_ensure,
-    source  => $::vscode::vscode_download_absolute_path,
-    require => File[$::vscode::vscode_download_absolute_path],
+  package { $package_name:
+    ensure          => $package_ensure,
+    source          => $vscode_download_absolute_path,
+    install_options => ['/verysilent'],
+    require         => File[$vscode_download_absolute_path],
   }
 }
