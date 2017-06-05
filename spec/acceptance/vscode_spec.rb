@@ -19,7 +19,7 @@ describe 'vscode' do
       apply_manifest(install_manifest, :catch_changes => true)
     end
 
-    describe package('visualstudiocode') do
+    describe package('Microsoft Visual Studio Code') do
       it { should be_installed }
     end
 
@@ -47,7 +47,7 @@ describe 'vscode' do
       apply_manifest(uninstall_manifest, :catch_changes => true)
     end
 
-    describe package('visualstudiocode') do
+    describe package('Microsoft Visual Studio Code') do
       it { should_not be_installed }
     end
     
