@@ -7,7 +7,6 @@ describe 'vscode' do
       <<-MANIFEST
           class { 'vscode':
               package_ensure      => 'present',
-              create_desktop_icon => false,
           }
         MANIFEST
     }
