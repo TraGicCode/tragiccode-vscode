@@ -53,6 +53,9 @@ class vscode(
   Boolean $create_context_menu_files = $vscode::params::create_context_menu_files,
   Boolean $create_context_menu_folders = $vscode::params::create_context_menu_folders,
   Boolean $add_to_path = $vscode::params::add_to_path,
+  Stdlib::Absolutepath $vscode_user_code_directory = $vscode::params::vscode_user_code_directory,
+  Stdlib::Absolutepath $vscode_user_user_directory = $vscode::params::vscode_user_user_directory,
+  Stdlib::Absolutepath $vscode_user_settings_file_absolute_path = $vscode::params::vscode_user_settings_file_absolute_path,
 ) inherits vscode::params {
 
   contain vscode::install
