@@ -44,7 +44,7 @@ class vscode::install(
     default => 'addcontextmenufolders',
   }
 
-  
+
   $_string_add_to_path = $add_to_path ? {
     false   => '!addtopath',
     default => 'addtopath',
