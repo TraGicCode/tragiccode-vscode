@@ -71,7 +71,7 @@ class { 'vscode':
 
 vscode::extension { 'Borke.puppet':
   ensure  => 'present',
-  require => Class['vscode],
+  require => Class['vscode'],
 }
 ```
 
@@ -83,7 +83,7 @@ class { 'vscode':
 
 vscode::extension { 'Borke.puppet':
   ensure  => 'absent',
-  require => Class['vscode],
+  require => Class['vscode'],
 }
 ```
 
