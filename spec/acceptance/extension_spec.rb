@@ -1,6 +1,7 @@
 require 'spec_helper_acceptance'
 
 describe 'vscode::extension' do
+  # https://stackoverflow.com/questions/16617052/rails-rspec-before-all-vs-before-each
   before(:all) do
       host = find_only_one("agent")
       install_vscode(host)
