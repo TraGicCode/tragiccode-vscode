@@ -49,6 +49,8 @@ GEM
     docker-api (1.33.4)
       excon (>= 0.38.0)
       json
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     excon (0.56.0)
     facter (2.4.6-x64-mingw32)
@@ -239,6 +241,8 @@ GEM
     hiera (3.3.1-x64-mingw32)
       win32-dir (~> 0.4.8)
     hocon (1.2.5)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     httpclient (2.8.3)
     in-parallel (0.1.17)
     inflecto (0.0.2)
@@ -279,6 +283,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
     net-telnet (0.1.1)
+    netrc (0.11.0)
     nokogiri (1.8.0-x64-mingw32)
       mini_portile2 (~> 2.2.0)
     nori (2.6.0)
@@ -309,6 +314,9 @@ GEM
       win32-process (= 0.7.5)
       win32-security (= 0.2.5)
       win32-service (= 0.8.8)
+    puppet-blacksmith (3.3.1)
+      puppet (>= 2.7.16)
+      rest-client
     puppet-lint (2.2.1)
     puppet-strings (1.1.0)
       yard (~> 0.9.5)
@@ -334,6 +342,11 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    rest-client (2.0.2-x64-mingw32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     retriable (3.0.2)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
@@ -427,6 +440,7 @@ DEPENDENCIES
   guard-rake
   metadata-json-lint
   puppet (>= 4.10.1)
+  puppet-blacksmith
   puppet-lint (>= 1.0.0)
   puppet-strings
   puppetlabs_spec_helper (>= 1.0.0)

@@ -17,3 +17,4 @@ gem 'winrm'
 
 gem 'rake'
 gem 'rubocop'
+gem 'puppet-blacksmith'
