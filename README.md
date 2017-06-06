@@ -145,6 +145,26 @@ Specifies whether to add the bin directory of visualstudio code to the user's sy
 
 Default: true.
 
+### Defined Types
+
+Parameters are optional unless otherwise noted.
+
+#### `vscode::extension`
+
+Installs visual studio code extensions published by the community.
+
+#### `ensure`
+
+Specifies whether the visualstudiocode extension should be present. Valid options: 'present', 'installed' and 'absent'.
+
+Default: 'present'.
+
+##### `extension_name`
+
+Specifies a visualstudiocode extension to manage. Valid options: a string containing the name of an existing visualstudiocode extension.
+
+Default: the title of your declared resource.
+
 ## Limitations
 
 This module is only available for Windows 8 and up and works with Puppet 4.0 and later.
