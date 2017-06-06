@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'vscode' do
+describe 'vscode::extension' do
   before(:all) do
       host = find_only_one("agent")
       install_vscode(host)
@@ -34,5 +34,28 @@ describe 'vscode' do
 
   end
 
+
+  context 'when uninstalling with provided mandatory parameters' do
+    let(:install_manifest) {
+      <<-MANIFEST
+          vscode::extension { 'Borke.puppet':
+            ensure => 'absent',
+        }
+        MANIFEST
+    }
+
+    it 'should run without errors' do
+      apply_manifest(install_manifest, :catch_failures => true)
+    end
+
+    it 'should be idempotent' do
+      apply_manifest(install_manifest, :catch_changes => true)
+    end
+
+    describe command('& "C:\Program Files (x86)\Microsoft VS Code\bin\code.cmd" --list-extensions --show-versions') do
+       its(:stdout) { should_not match Regexp.escape('Borke.puppet') }
+    end
+
+  end
 
 end
