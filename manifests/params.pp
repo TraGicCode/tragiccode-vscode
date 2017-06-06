@@ -5,7 +5,7 @@ class vscode::params {
     $package_ensure = 'present'
     $package_name   = 'Microsoft Visual Studio Code'
     $vscode_download_url = 'https://az764295.vo.msecnd.net/stable/19222cdc84ce72202478ba1cec5cb557b71163de/VSCodeSetup-1.12.2.exe'
-    $vscode_download_absolute_path = 'C:\VSCodeSetup-1.12.2.exe'
+    $vscode_download_absolute_path = 'C:\Temp\VSCodeSetup-1.12.2.exe'
     $disable_extensions = false
     $vscode_user_code_directory = "${facts[appdata]}\\Code"
     $vscode_user_user_directory = "${vscode_user_code_directory}\\User"
