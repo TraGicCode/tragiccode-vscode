@@ -13,7 +13,7 @@ describe 'vscode::extension' do
 
     it { should contain_exec('install-vscode-extension-Bork.puppet').with({
       :command   => 'code.cmd --install-extension Bork.puppet',
-      :unless    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"'
+      :unless    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"',
       :path      => 'C:/Windows/System32;C:/Program Files (x86)/Microsoft VS Code/bin',
       :logoutput => 'true',
       }) }
@@ -27,7 +27,7 @@ describe 'vscode::extension' do
 
     it { should contain_exec('uninstall-vscode-extension-Bork.puppet').with({
       :command   => 'code.cmd --uninstall-extension Bork.puppet',
-      :onlyif    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"'
+      :onlyif    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"',
       :path      => 'C:/Windows/System32;C:/Program Files (x86)/Microsoft VS Code/bin',
       :logoutput => 'true',
       }) }
