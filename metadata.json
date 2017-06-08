@@ -10,6 +10,19 @@
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":"4.x"}
   ],
-  "data_provider": null
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "windows",
+      "operatingsystemrelease": [
+        "10"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "4.x"
+    }
+  ]
 }
 
