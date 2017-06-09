@@ -22,5 +22,10 @@ describe 'vscode::config' do
     })}
 
 
+    it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
+        :ensure => 'file',
+    }).with_content(/"workbench\.iconTheme": "vs-seti"/)}
+
+
   end
 end

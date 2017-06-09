@@ -1,0 +1,7 @@
+<%- | Enum['none', 'vs-minimal', 'vs-seti'] $icon_theme,
+| -%>
+{
+    <% if $icon_theme != 'none' { -%>
+    "workbench.iconTheme": "<%= $icon_theme %>"
+    <% } -%>
+}
