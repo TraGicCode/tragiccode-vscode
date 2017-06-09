@@ -24,7 +24,7 @@ describe 'vscode::config' do
 
     it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
         :ensure => 'file',
-    }).with_content(/"workbench\.iconTheme": "vs-seti"/)}
+    }).without_content(/"workbench\.iconTheme": "(.)*"/)}
 
   end
 
@@ -41,6 +41,20 @@ describe 'vscode::config' do
       it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
           :ensure => 'file',
       }).with_content(/"workbench\.iconTheme": "vs-minimal"/)}
+  end
 
+      context 'with icon_theme => vs-seti' do
+
+      let(:facts) {{
+        :appdata => 'C:\Users\tragiccode\AppData\Roaming',
+      }}
+
+      let (:params) {{
+        :icon_theme => 'vs-seti',
+      }}
+
+      it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
+          :ensure => 'file',
+      }).with_content(/"workbench\.iconTheme": "vs-seti"/)}
   end
 end
