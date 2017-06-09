@@ -3,5 +3,5 @@
 {
     <% if $icon_theme != 'none' { -%>
     "workbench.iconTheme": "<%= $icon_theme %>"
-    <% } -%>
+    <%- } -%>
 }

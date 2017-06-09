@@ -26,6 +26,21 @@ describe 'vscode::config' do
         :ensure => 'file',
     }).with_content(/"workbench\.iconTheme": "vs-seti"/)}
 
+  end
+
+    context 'with icon_theme => vs-minimal' do
+
+      let(:facts) {{
+        :appdata => 'C:\Users\tragiccode\AppData\Roaming',
+      }}
+
+      let (:params) {{
+        :icon_theme => 'vs-minimal',
+      }}
+
+      it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
+          :ensure => 'file',
+      }).with_content(/"workbench\.iconTheme": "vs-minimal"/)}
 
   end
 end
