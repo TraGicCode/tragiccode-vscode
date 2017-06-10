@@ -15,10 +15,10 @@ class vscode::config(
 
   file { $vscode_user_settings_file_absolute_path:
     ensure  => 'file',
-    content => epp("${module_name}/settings.json.epp", {
+    content => regsubst(epp("${module_name}/settings.json.epp", {
       'icon_theme'  => $icon_theme,
       'color_theme' => $color_theme,
-    }),
+    }), '\n', "\r\n", 'EMG'),
   }
 
 }
