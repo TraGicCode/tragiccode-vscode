@@ -24,7 +24,11 @@ describe 'vscode::config' do
 
     it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
         :ensure => 'file',
-    }).with_content(/"workbench\.iconTheme": ""/)}
+    }).with_content(/\/\/ Managed by Puppet! Changes made manually may be lost\./)
+      .with_content(/"workbench\.iconTheme": ""/)
+      .with_content(/"workbench\.colorTheme": ""/) }
+
+
 
   end
 
@@ -41,7 +45,7 @@ describe 'vscode::config' do
       it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
           :ensure => 'file',
       }).with_content(/"workbench\.iconTheme": "vs-minimal"/)}
-  end
+    end
 
     context 'with icon_theme => vs-seti' do
 
@@ -56,7 +60,7 @@ describe 'vscode::config' do
       it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
           :ensure => 'file',
       }).with_content(/"workbench\.iconTheme": "vs-seti"/)}
-  end
+    end
 
     context 'with color_theme => Monokai Dimmed' do
 
@@ -71,5 +75,5 @@ describe 'vscode::config' do
       it { should contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with({
           :ensure => 'file',
       }).with_content(/"workbench\.colorTheme": "Monokai Dimmed"/)}
-  end
+    end
 end
