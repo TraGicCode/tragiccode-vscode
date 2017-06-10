@@ -16,4 +16,5 @@ class vscode::params {
     $create_context_menu_folders = true
     $add_to_path = true
     $icon_theme = undef
+    $color_theme = undef
 }

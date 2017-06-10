@@ -1,7 +1,7 @@
 <%- | Optional[Enum['vs-minimal', 'vs-seti']] $icon_theme,
+      Optional[String] $color_theme,
 | -%>
 {
-    <% if $icon_theme != 'none' { -%>
-    "workbench.iconTheme": "<%= $icon_theme %>"
-    <%- } -%>
+    "workbench.iconTheme": "<%= $icon_theme %>",
+    "workbench.colorTheme": "<%= $color_theme %>",
 }
