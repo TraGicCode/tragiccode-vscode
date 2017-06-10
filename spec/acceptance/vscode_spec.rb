@@ -23,7 +23,12 @@ describe 'vscode' do
       it { should be_installed }
     end
 
-    describe file('C:\VSCodeSetup-1.12.2.exe') do
+    describe file('C:\Windows\Temp\VSCodeSetup-1.12.2.exe') do
+       it { should exist }
+       it { should be_file }
+    end
+
+    describe file('~\AppData\Roaming\Code\User\settings.json') do
        it { should exist }
        it { should be_file }
     end
@@ -51,7 +56,7 @@ describe 'vscode' do
       it { should_not be_installed }
     end
     
-    describe file('C:\VSCodeSetup-1.12.2.exe') do
+    describe file('C:\Windows\Temp\VSCodeSetup-1.12.2.exe') do
        it { should_not exist }
     end
 
