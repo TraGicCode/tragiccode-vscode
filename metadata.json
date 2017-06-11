@@ -1,6 +1,6 @@
 {
   "name": "tragiccode-vscode",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "tragiccode",
   "summary": "The `vscode` module installs and manages vscode on Windows systems.",
   "license": "Apache-2.0",

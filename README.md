@@ -14,7 +14,7 @@
 
 ## Description
 
-The vscode module installs and manages microsoft's visualstudio code along with extensions Windows systems.
+The vscode module installs and manages microsoft's visualstudio code, it's extensions, and user preference settings on Windows systems.
 
 visualstudio code is an ide used by developers to write code.
 
@@ -53,6 +53,8 @@ class { 'vscode':
    create_context_menu_files     => true,
    create_context_menu_folders   => true,
    add_to_path                   => true,
+   icon_theme                    => 'vs-seti',
+   color_theme                   => 'Monokai Dimmed',
  }
 ```
 
@@ -85,6 +87,16 @@ vscode::extension { 'Borke.puppet':
   ensure  => 'absent',
   require => Class['vscode'],
 }
+```
+
+### Customize color them and icon theme
+```puppet
+class { 'vscode':
+    package_ensure => 'present',
+    color_theme    => 'Monokai Dimmed',
+    icon_theme     => 'vs-seti',
+}
+
 ```
 
 ## Reference
@@ -144,6 +156,18 @@ Default: true.
 Specifies whether to add the bin directory of visualstudio code to the user's system path.
 
 Default: true.
+
+#### `color_theme`
+
+Specifies which color theme should be used in vscode.
+
+Default: undef.
+
+#### `icon_theme`
+
+Specifies which icon theme should be used in vscode.
+
+Default: undef.
 
 ### Defined Types
 

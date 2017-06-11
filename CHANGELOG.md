@@ -1,3 +1,14 @@
+## 2017-06-10 - Version 0.2.0
+
+### Summary
+
+Added the ability to manage the settings.json file
+
+### Features
+ - Can customize the vscode color theme
+ - Can customize the vscode icon theme
+
+
 ## 2017-06-08 - Version 0.1.1
 
 ### Summary
