@@ -1,3 +1,12 @@
+## 2017-07-05 - Version 0.2.1
+
+### Summary
+
+Minor bug fixes with no breaking changes.
+
+### Bug Fixes
+ - Fixed issue where vscode::extension was not idempotent when case was different then the published extension in the vscode extension marketplace.  Simply made the idempotency check ignore case.
+
 ## 2017-06-10 - Version 0.2.0
 
 ### Summary
