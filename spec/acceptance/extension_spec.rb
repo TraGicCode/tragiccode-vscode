@@ -59,4 +59,22 @@ describe 'vscode::extension' do
 
   end
 
+  context 'when specifying an extension case sensitivity should not matter' do
+    let(:install_manifest) {
+      <<-MANIFEST
+          vscode::extension { 'MS-VSCODE.POWERSHELL':
+            ensure => 'present',
+        }
+        MANIFEST
+    }
+
+    it 'should run without errors' do
+      apply_manifest(install_manifest, :catch_failures => true)
+    end
+
+    it 'should be idempotent' do
+      apply_manifest(install_manifest, :catch_changes => true)
+    end
+  end
+
 end
