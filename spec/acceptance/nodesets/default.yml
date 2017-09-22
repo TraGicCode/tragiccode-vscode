@@ -1,35 +1,17 @@
 ---
 HOSTS:
-  win-2012R2-std: # The host name
-    roles: # what roles this host plays.  Allows for using the role to send some operation to 1-many nodes easily
+  windows-2016-standard:
+    roles:
       - agent
-    # /^OSFAMILY-VERSION-ARCH.*$/
-    # what type of system this is.
-    # Beaker depends upon each host in the configuration file having a platform type that is correctly formatted and supported
     platform: windows-server-amd64
-    box: opentable/win-2012r2-standard-amd64-nocm
-    # .vagrant/beaker_vagrant_files
-    # Once vagrant file per host file will be created in the above directory
+    box: tragiccode/windows-2016-standard
     hypervisor: vagrant
     user: vagrant
-    ip: '10.255.33.129' # ip of host
     is_cygwin: false
     # Run non-headless mode
     vb_gui: true
-    vbguest_plugin: 'enable' # as long as it's not disable pretty much
-    # Other vagrant settings
-    # vagrant_memsize: 4096
-    # vagrant_cpus: 2
-    # box_url
-    # forwarded_ports:
-    #   apache:
-    #     from: 10080
-    #     to: 80
-    #   tomcat:
-    #     from: 8080
-    #     to: 8080
-    #     from_ip: '127.0.0.1'
-    #     to_ip: '0.0.0.0'
+    vagrant_memsize: 4096
+    vagrant_cpus: 2
 CONFIG:
   log_level: verbose
-  type: aio # the agent type.  This is the new aio so lets use this for puppet 4 and up
+  type: aio

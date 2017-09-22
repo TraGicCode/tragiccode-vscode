@@ -4,3 +4,5 @@ log/
 spec/fixtures/
 .yardoc/
 doc/
+pkg/
+Gemfile.lock
