@@ -15,7 +15,7 @@ describe 'vscode::extension' do
   context 'when installing with provided mandatory parameters' do
     let(:install_manifest) {
       <<-MANIFEST
-          vscode::extension { 'Borke.puppet':
+          vscode::extension { 'jpogran.puppet-vscode':
             ensure => 'present',
         }
         MANIFEST
@@ -29,8 +29,8 @@ describe 'vscode::extension' do
       apply_manifest(install_manifest, :catch_changes => true)
     end
 
-    describe command('& "C:\Program Files (x86)\Microsoft VS Code\bin\code.cmd" --list-extensions --show-versions') do
-       its(:stdout) { should match Regexp.escape('Borke.puppet') }
+    describe command('& "C:\Program Files\Microsoft VS Code\bin\code.cmd" --list-extensions --show-versions') do
+       its(:stdout) { should match Regexp.escape('jpogran.puppet-vscode') }
     end
 
   end
@@ -39,7 +39,7 @@ describe 'vscode::extension' do
   context 'when uninstalling with provided mandatory parameters' do
     let(:install_manifest) {
       <<-MANIFEST
-          vscode::extension { 'Borke.puppet':
+          vscode::extension { 'jpogran.puppet-vscode':
             ensure => 'absent',
         }
         MANIFEST
@@ -53,8 +53,8 @@ describe 'vscode::extension' do
       apply_manifest(install_manifest, :catch_changes => true)
     end
 
-    describe command('& "C:\Program Files (x86)\Microsoft VS Code\bin\code.cmd" --list-extensions --show-versions') do
-       its(:stdout) { should_not match Regexp.escape('Borke.puppet') }
+    describe command('& "C:\Program Files\Microsoft VS Code\bin\code.cmd" --list-extensions --show-versions') do
+       its(:stdout) { should_not match Regexp.escape('jpogran.puppet-vscode') }
     end
 
   end

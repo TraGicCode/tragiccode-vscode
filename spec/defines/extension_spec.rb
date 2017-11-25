@@ -3,17 +3,17 @@ require 'spec_helper'
 describe 'vscode::extension' do
 
     let(:title) {
-        'Bork.puppet'
+        'jpogran.puppet-vscode'
     }
 
   context 'with ensure => present' do
     let(:params) {{
-        :extension_name => 'Bork.puppet',
+        :extension_name => 'jpogran.puppet-vscode',
     }}
 
-    it { should contain_exec('install-vscode-extension-Bork.puppet').with({
-      :command   => 'code.cmd --install-extension Bork.puppet',
-      :unless    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"',
+    it { should contain_exec('install-vscode-extension-jpogran.puppet-vscode').with({
+      :command   => 'code.cmd --install-extension jpogran.puppet-vscode',
+      :unless    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe jpogran.puppet-vscode"',
       :path      => 'C:/Windows/System32;C:/Program Files (x86)/Microsoft VS Code/bin',
       :logoutput => 'true',
       }) }
@@ -21,13 +21,13 @@ describe 'vscode::extension' do
 
   context 'with ensure => absent' do
     let(:params) {{
-        :extension_name => 'Bork.puppet',
+        :extension_name => 'jpogran.puppet-vscode',
         :ensure         => 'absent',
     }}
 
-    it { should contain_exec('uninstall-vscode-extension-Bork.puppet').with({
-      :command   => 'code.cmd --uninstall-extension Bork.puppet',
-      :onlyif    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe Bork.puppet"',
+    it { should contain_exec('uninstall-vscode-extension-jpogran.puppet-vscode').with({
+      :command   => 'code.cmd --uninstall-extension jpogran.puppet-vscode',
+      :onlyif    => 'cmd.exe /c "code.cmd --list-extensions --show-versions | findstr.exe jpogran.puppet-vscode"',
       :path      => 'C:/Windows/System32;C:/Program Files (x86)/Microsoft VS Code/bin',
       :logoutput => 'true',
       }) }
