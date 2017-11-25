@@ -2,7 +2,6 @@ require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 require 'beaker/puppet_install_helper'
 require 'winrm'
-require 'vscode_testing_helpers'
 
 GEOTRUST_GLOBAL_CA = <<-EOM.freeze
 -----BEGIN CERTIFICATE-----
