@@ -4,7 +4,7 @@ HOSTS:
     roles:
       - agent
     platform: windows-server-amd64
-    box: tragiccode/windows-2016-standard
+    box: tragiccode/windows-server-2016-standard
     hypervisor: vagrant
     user: vagrant
     is_cygwin: false
