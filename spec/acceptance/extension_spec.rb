@@ -11,11 +11,12 @@ describe 'vscode::extension' do
       host = find_only_one("agent")
       uninstall_vscode(host)
   end
-
+ # https://github.com/puppetlabs/beaker-testmode_switcher/blob/c789e6fe7203d19674f5f2181a0d1d8e637cdf11/lib/beaker/testmode_switcher/beaker_runners.rb
+ # Contains the ability to call puppet resource
   context 'when installing with provided mandatory parameters' do
     let(:install_manifest) {
       <<-MANIFEST
-          vscode::extension { 'jpogran.puppet-vscode':
+          vscode_extension { 'jpogran.puppet-vscode':
             ensure => 'present',
         }
         MANIFEST
@@ -39,7 +40,7 @@ describe 'vscode::extension' do
   context 'when uninstalling with provided mandatory parameters' do
     let(:install_manifest) {
       <<-MANIFEST
-          vscode::extension { 'jpogran.puppet-vscode':
+          vscode_extension { 'jpogran.puppet-vscode':
             ensure => 'absent',
         }
         MANIFEST
