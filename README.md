@@ -71,7 +71,7 @@ class { 'vscode':
     package_ensure => 'present',
 }
 
-vscode::extension { 'Borke.puppet':
+vscode_extension { 'Borke.puppet':
   ensure  => 'present',
   require => Class['vscode'],
 }
@@ -83,7 +83,7 @@ class { 'vscode':
     package_ensure => 'present',
 }
 
-vscode::extension { 'Borke.puppet':
+vscode_extension { 'Borke.puppet':
   ensure  => 'absent',
   require => Class['vscode'],
 }
@@ -169,7 +169,7 @@ Specifies which icon theme should be used in vscode.
 
 Default: undef.
 
-### Defined Types
+### Types
 
 Parameters are optional unless otherwise noted.
 
