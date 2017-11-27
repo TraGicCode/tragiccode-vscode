@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project follows semver to help clients understand the impact of updates/changes.  Find out more at http://semver.org.
 
+## [v1.1.0](https://github.com/TraGicCode/tragiccode-vscode/tree/v1.1.0) (2017-11-27)
+[Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v1.0.0...v1.1.0)
+
+**Closed issues:**
+
+- Add Ability to manage vscode\_extensions via mac/linux [\#17](https://github.com/TraGicCode/tragiccode-vscode/issues/17)
+
+**Merged pull requests:**
+
+- Ability to manage vscode\_extensions via mac/linux. [\#18](https://github.com/TraGicCode/tragiccode-vscode/pull/18) ([TraGicCode](https://github.com/TraGicCode))
+
 ## [v1.0.0](https://github.com/TraGicCode/tragiccode-vscode/tree/v1.0.0) (2017-11-27)
 [Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v0.2.2...v1.0.0)
 
@@ -14,6 +25,7 @@ This project follows semver to help clients understand the impact of updates/cha
 
 **Merged pull requests:**
 
+- 1.0.0 release [\#16](https://github.com/TraGicCode/tragiccode-vscode/pull/16) ([TraGicCode](https://github.com/TraGicCode))
 - Convert defined type to type & provider [\#15](https://github.com/TraGicCode/tragiccode-vscode/pull/15) ([TraGicCode](https://github.com/TraGicCode))
 - Fix unit tests from x64 fix release [\#13](https://github.com/TraGicCode/tragiccode-vscode/pull/13) ([TraGicCode](https://github.com/TraGicCode))
 
