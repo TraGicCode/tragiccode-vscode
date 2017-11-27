@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 This project follows semver to help clients understand the impact of updates/changes.  Find out more at http://semver.org.
 
+## [v1.0.0](https://github.com/TraGicCode/tragiccode-vscode/tree/v1.0.0) (2017-11-27)
+[Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v0.2.2...v1.0.0)
+
+**Closed issues:**
+
+- Convert vscode::extension to type & provider [\#14](https://github.com/TraGicCode/tragiccode-vscode/issues/14)
+- Fixed unit tests from x64 bit upgrade [\#12](https://github.com/TraGicCode/tragiccode-vscode/issues/12)
+- Broken with introduction to 64bit vscode [\#8](https://github.com/TraGicCode/tragiccode-vscode/issues/8)
+
+**Merged pull requests:**
+
+- Convert defined type to type & provider [\#15](https://github.com/TraGicCode/tragiccode-vscode/pull/15) ([TraGicCode](https://github.com/TraGicCode))
+- Fix unit tests from x64 fix release [\#13](https://github.com/TraGicCode/tragiccode-vscode/pull/13) ([TraGicCode](https://github.com/TraGicCode))
+
 ## [v0.2.2](https://github.com/TraGicCode/tragiccode-vscode/tree/v0.2.2) (2017-11-25)
 [Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v0.2.1...v0.2.2)
 
