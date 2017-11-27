@@ -1,7 +1,11 @@
 Puppet::Type.type(:vscode_extension).provide(:cli) do
 
-    commands :code => "#{ENV['SYSTEMDRIVE']}\\Program Files\\Microsoft VS Code\\bin\\code.cmd"
-
+    commands :code =>
+        if File.exists?("#{ENV['SYSTEMDRIVE']}\\Program Files\\Microsoft VS Code\\bin\\code.cmd")
+            "#{ENV['SYSTEMDRIVE']}\\Program Files\\Microsoft VS Code\\bin\\code.cmd"
+        else
+            "code"
+        end
     # The code CLI tool doesn't properly return exit codes.  Therefore
     # i need to wrap the executable call and do a pattern match on the output
     # to check if an error occurs or not.

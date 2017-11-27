@@ -30,6 +30,8 @@ The vscode module requires the following:
 
 ### Beginning with vscode
 
+**NOTE: The vscode class currently only works on windows.**
+
 To get started with the vscode module simply include the following in your manifest:
 
 ```puppet
@@ -59,6 +61,7 @@ class { 'vscode':
 ```
 
 The above is just an example of the flexibility you have with this module.  You will generally never need to specify every or even so many parameters as shown since the defaults for installation apply almost every feature available during install time.  The one parameter you might use is the vscode_download_url.  This will allow you to another http url to download vscode from that is not pinned to version 1.12.2 like this module from microsoft's visualstudio code download page.
+
 
 ## Usage
 
