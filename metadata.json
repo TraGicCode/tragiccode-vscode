@@ -19,6 +19,12 @@
       "operatingsystemrelease": [
         "10"
       ]
+    },
+    {
+      "operatingsystem": "Darwin",
+      "operatingsystemrelease": [
+        "15.6.0"
+      ]
     }
   ],
   "requirements": [
