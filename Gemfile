@@ -13,9 +13,9 @@ gem 'puppet-blacksmith'
 
 gem 'beaker'
 gem 'beaker-puppet_install_helper'
+gem 'beaker-module_install_helper'
 gem 'beaker-rspec'
 gem 'serverspec'
-gem 'winrm'
 
 gem 'rake'
 gem 'rubocop'

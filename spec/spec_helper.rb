@@ -3,6 +3,6 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 RSpec.configure do |c|
   c.formatter = :documentation
   c.after(:suite) do
-    RSpec::Puppet::Coverage.report!(85)
+    RSpec::Puppet::Coverage.report!
   end
 end
