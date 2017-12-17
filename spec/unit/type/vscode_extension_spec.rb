@@ -1,29 +1,70 @@
 require 'spec_helper'
 
-describe 'vscode_extension' do
-    # This gets the type but doesn't create an instance.  This is asking for the actual class for our type
-    # In ou case this is Puppet::Type::Vscode_extension
-    #  Puppet::Type.type(:vscode_extension).new(name: 't')
-    let(:type_class) { Puppet::Type.type(:vscode_extension) }
-    let(:parameters) { [ :extension_name ] }
-    let(:properties) { [ :ensure ] }
+def vscode_extension(params = {})
+  defaults = {
+    ensure: :present,
+    extension_name: 'ms-vscode.PowerShell',
+  }
+  described_class.new(**defaults.merge(params))
+end
 
-    it 'should have expected parameters' do
-        parameters.each do |parameter|
-            expect(type_class.parameters).to include(parameter)
-        end
+describe Puppet::Type.type(:vscode_extension) do
+  subject { vscode_extension }
+
+  describe 'parameter :extension_name' do
+    it 'is a parameter' do
+      expect(described_class.attrtype(:extension_name)).to eq(:param)
     end
 
-    it 'should have expected properties' do
-        properties.each do |property|
-            expect(type_class.properties.map(&:name)).to be_include(property)
-        end
+    it 'is the namevar' do
+      expect(subject.parameters[:extension_name]).to be_isnamevar
     end
 
-    [:present, :installed, :absent].each do |value|
-        it "should accept #{value} as a value for :ensure" do
-            expect(type_class.new(name: 'test', ensure: value)) # Notice this actually creates an instance of the type
-        end
+    it 'has documentation' do
+      expect(described_class.attrclass(:extension_name).doc).not_to eq("\n\n")
     end
 
+    it 'cannot be set to nil' do
+      expect {
+        subject[:extension_name] = nil
+      }.to raise_error(Puppet::Error, %r{Got nil value for extension_name})
+    end
+    # This protects against
+    # vscode_extension{ 's': ensure => present, extension_name => '', }
+    it 'cannot be set to an empty string' do
+      expect {
+        subject[:extension_name] = ''
+      }.to raise_error(Puppet::Error, %r{A non-empty extension_name must})
+    end
+
+    it 'can be set to a value following the (publisher name).(extension name) pattern' do
+      expect {
+        subject[:extension_name] = 'ms-vscode.PowerShell'
+      }.not_to raise_error
+    end
+
+    it 'cannot be set to a value not following the (publisher name).(extension name) pattern' do
+      expect {
+        subject[:extension_name] = 'invalid-vscode-extension-name'
+      }.to raise_error(Puppet::Error, %r{#{Regexp.escape('Extension names must following the (publisher name).(extension name) pattern')}})
+    end
+  end
+
+  describe 'property :ensure' do
+    it 'is a property' do
+      expect(described_class.attrtype(:ensure)).to eq(:property)
+    end
+
+    it 'has Puppet::Property::Ensure as a parent' do
+      expect(described_class.attrclass(:ensure).superclass).to eq(Puppet::Property::Ensure)
+    end
+
+    [:present, :installed, :absent].each do |ensure_value|
+      it "can set be set to #{ensure_value}" do
+        expect {
+          subject[:ensure] = ensure_value
+        }.not_to raise_error
+      end
+    end
+  end
 end
