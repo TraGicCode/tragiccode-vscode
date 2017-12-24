@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project follows semver to help clients understand the impact of updates/changes.  Find out more at http://semver.org.
 
+## [v1.2.0](https://github.com/TraGicCode/tragiccode-vscode/tree/v1.2.0) (2017-12-24)
+[Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v1.1.0...v1.2.0)
+
+**Merged pull requests:**
+
+- modulesync [\#21](https://github.com/TraGicCode/tragiccode-vscode/pull/21) ([TraGicCode](https://github.com/TraGicCode))
+
 ## [v1.1.0](https://github.com/TraGicCode/tragiccode-vscode/tree/v1.1.0) (2017-11-27)
 [Full Changelog](https://github.com/TraGicCode/tragiccode-vscode/compare/v1.0.0...v1.1.0)
 
