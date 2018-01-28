@@ -1,5 +1,7 @@
 # vscode
 
+[![Puppet Forge](http://img.shields.io/puppetforge/v/tragiccode/vscode.svg)](https://forge.puppetlabs.com/tragiccode/vscode)
+
 #### Table of Contents
 
 1. [Description](#description)
