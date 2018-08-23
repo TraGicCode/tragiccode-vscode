@@ -1,95 +1,209 @@
-
 # vscode
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
-
-
-
-
-
-
+[![Puppet Forge](http://img.shields.io/puppetforge/v/tragiccode/vscode.svg)](https://forge.puppetlabs.com/tragiccode/vscode)
 
 #### Table of Contents
 
 1. [Description](#description)
-2. [Setup - The basics of getting started with vscode](#setup)
-    * [What vscode affects](#what-vscode-affects)
+1. [Setup - The basics of getting started with vscode](#setup)
     * [Setup requirements](#setup-requirements)
     * [Beginning with vscode](#beginning-with-vscode)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+1. [Usage - Configuration options and additional functionality](#usage)
+    * [Install vscode only](#install_vscode_only)
+1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+1. [Limitations - OS compatibility, etc.](#limitations)
+1. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+The vscode module installs and manages microsoft's visualstudio code, it's extensions, and user preference settings on Windows systems.
 
-This should be a fairly short description helps the user decide if your module is what they want.
-
+visualstudio code is an ide used by developers to write code.
 
 ## Setup
 
-### What vscode affects **OPTIONAL**
+### Setup Requirements
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
+The vscode module requires the following:
 
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
+* Puppet Agent 4.0 or later.
+* Access to the internet.
+* Windows Server 8 and up.
 
 ### Beginning with vscode
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+**NOTE: The vscode class currently only works on windows.**
+
+To get started with the vscode module simply include the following in your manifest:
+
+```puppet
+class { 'vscode':
+    package_ensure => 'present',
+}
+```
+
+This example downloads and installs vscode version 1.12.2.  After running this you be have visual studio code installed and ready to go.
+
+
+A more advanced configuration including all attributes available:
+
+```puppet
+class { 'vscode':
+   package_ensure                => 'present',
+   vscode_download_url           => 'https://company-name.s3.amazonaws.com/binaries/vscode-latest.exe',
+   vscode_download_absolute_path => 'C:\\Windows\\Temp',
+   create_desktop_icon           => true,
+   create_quick_launch_icon      => true,
+   create_context_menu_files     => true,
+   create_context_menu_folders   => true,
+   add_to_path                   => true,
+   icon_theme                    => 'vs-seti',
+   color_theme                   => 'Monokai Dimmed',
+ }
+```
+
+The above is just an example of the flexibility you have with this module.  You will generally never need to specify every or even so many parameters as shown since the defaults for installation apply almost every feature available during install time.  The one parameter you might use is the vscode_download_url.  This will allow you to another http url to download vscode from that is not pinned to version 1.12.2 like this module from microsoft's visualstudio code download page.
+
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your users how to use your module to solve problems, and be sure to include code examples. Include three to five examples of the most important or common tasks a user can accomplish with your module. Show users how to accomplish more complex tasks that involve different types, classes, and functions working in tandem.
+### Install vscode an extension
+
+Lets look at an example of installing visual studio code along with installing a plugin to help you with puppet development
+
+```puppet
+class { 'vscode':
+    package_ensure => 'present',
+}
+
+vscode_extension { 'Borke.puppet':
+  ensure  => 'present',
+  require => Class['vscode'],
+}
+```
+
+### Uninstall a vscode extension
+```puppet
+class { 'vscode':
+    package_ensure => 'present',
+}
+
+vscode_extension { 'Borke.puppet':
+  ensure  => 'absent',
+  require => Class['vscode'],
+}
+```
+
+### Customize color them and icon theme
+```puppet
+class { 'vscode':
+    package_ensure => 'present',
+    color_theme    => 'Monokai Dimmed',
+    icon_theme     => 'vs-seti',
+}
+
+```
 
 ## Reference
 
-This section is deprecated. Instead, add reference information to your code as Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your module. For details on how to add code comments and generate documentation with Strings, see the Puppet Strings [documentation](https://puppet.com/docs/puppet/latest/puppet_strings.html) and [style guide](https://puppet.com/docs/puppet/latest/puppet_strings_style.html)
+### Classes
 
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the root of your module directory and list out each of your module's classes, defined types, facts, functions, Puppet tasks, task plans, and resource types and providers, along with the parameters for each.
+Parameters are optional unless otherwise noted.
 
-For each element (class, defined type, function, and so on), list:
+#### `vscode`
 
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
+Installs and configures visual studio code based on user preferences/settings.
 
-For example:
+#### `package_ensure`
 
-```
-### `pet::cat`
+Specifies whether the visualstudiocode package resource should be present. Valid options: 'present', 'installed' and 'absent'.
 
-#### Parameters
+Default: 'present'.
 
-##### `meow`
+#### `vscode_download_url`
 
-Enables vocalization in your cat. Valid options: 'string'.
+http/https url in which a visualstudiocode installer can be downloaded.
 
-Default: 'medium-loud'.
-```
+Default: 'https://az764295.vo.msecnd.net/stable/19222cdc84ce72202478ba1cec5cb557b71163de/VSCodeSetup-1.12.2.exe'
+
+#### `vscode_download_absolute_path`
+
+The location in which to store the downloaded vscode installer at on the filesystem.
+
+Default: 'C:\Temp\VSCodeSetup-1.12.2.exe'
+
+#### `create_desktop_icon`
+
+Specifies whether to create an icon/shortcut for visualstudiocode on the user's desktop.
+
+Default: true.
+
+#### `create_quick_launch_icon`
+
+Specifies whether to add visualstudiocode on the user's quicklaunch section of their taskbar.
+
+Default: true.
+
+#### `create_context_menu_files`
+
+Specifies whether to add the open in code context menu item when a user right clicks a file.
+
+Default: true.
+
+#### `create_context_menu_folders`
+
+Specifies whether to add the open in code context menu item when a user right clicks a folder.
+
+Default: true.
+
+#### `add_to_path`
+
+Specifies whether to add the bin directory of visualstudio code to the user's system path.
+
+Default: true.
+
+#### `color_theme`
+
+Specifies which color theme should be used in vscode.
+
+Default: undef.
+
+#### `icon_theme`
+
+Specifies which icon theme should be used in vscode.
+
+Default: undef.
+
+### Types
+
+Parameters are optional unless otherwise noted.
+
+#### `vscode::extension`
+
+Installs visual studio code extensions published by the community.
+
+#### `ensure`
+
+Specifies whether the visualstudiocode extension should be present. Valid options: 'present', 'installed' and 'absent'.
+
+Default: 'present'.
+
+##### `extension_name`
+
+Specifies a visualstudiocode extension to manage. Valid options: a string containing the name of an existing visualstudiocode extension.
+
+Default: the title of your declared resource.
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other warnings.
+This module is only available for Windows 8 and up and works with Puppet 4.0 and later.
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing to your project and how they should submit their work.
+## Contributing
 
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+1. Fork it ( https://github.com/tragiccode/tragiccode-vscode/fork )
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create a new Pull Request
