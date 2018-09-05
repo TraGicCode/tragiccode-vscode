@@ -53,7 +53,13 @@ class vscode::install(
   package { $package_name:
     ensure            => $package_ensure,
     source            => $vscode_download_absolute_path,
-    install_options   => ['/verysilent', "/mergetasks=!runCode,${_string_create_desktop_icon},${_string_create_quick_launch_icon},${_string_create_context_menu_files},${_string_create_context_menu_folders},${_string_add_to_path}", { '/log' => 'C:\\VSCodeSetup-install.log', }],
+    install_options   => [
+      '/verysilent',
+      # lint:ignore:ignore:140chars
+      "/mergetasks=!runCode,${_string_create_desktop_icon},${_string_create_quick_launch_icon},${_string_create_context_menu_files},${_string_create_context_menu_folders},${_string_add_to_path}",
+      # lint:endignore
+      { '/log' => 'C:\\VSCodeSetup-install.log', }
+    ],
     uninstall_options => ['/verysilent'],
     require           => File[$vscode_download_absolute_path],
   }
