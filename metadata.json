@@ -6,7 +6,10 @@
   "license": "Apache-2.0",
   "source": "https://github.com/TraGicCode/tragiccode-vscode",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.13.1 < 6.0.0"
+    }
   ],
   "operatingsystem_support": [
     {

@@ -1,0 +1,8 @@
+<%- | Optional[Enum['vs-minimal', 'vs-seti']] $icon_theme,
+      Optional[String] $color_theme,
+| -%>
+// Managed by Puppet! Changes made manually may be lost.
+{
+    "workbench.iconTheme": "<%= $icon_theme %>",
+    "workbench.colorTheme": "<%= $color_theme %>",
+}
