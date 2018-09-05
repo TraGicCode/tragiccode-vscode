@@ -3,7 +3,7 @@ Puppet::Type.type(:vscode_extension).provide(:cli) do
                          "#{ENV['SYSTEMDRIVE']}\\Program Files\\Microsoft VS Code\\bin\\code.cmd"
                        else
                          'code'
-      end
+                       end
   # The code CLI tool doesn't properly return exit codes.  Therefore
   # i need to wrap the executable call and do a pattern match on the output
   # to check if an error occurs or not.
@@ -28,7 +28,8 @@ Puppet::Type.type(:vscode_extension).provide(:cli) do
   # With the provider instances ( returned from self.instances )
   def self.prefetch(resources)
     instances.each do |prov|
-      if resource = resources[prov.name]
+      resource = resources[prov.name]
+      if resource
         resource.provider = prov
       end
     end

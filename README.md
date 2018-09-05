@@ -76,7 +76,7 @@ class { 'vscode':
     package_ensure => 'present',
 }
 
-vscode_extension { 'Borke.puppet':
+vscode_extension { 'jpogran.puppet':
   ensure  => 'present',
   require => Class['vscode'],
 }
@@ -88,7 +88,7 @@ class { 'vscode':
     package_ensure => 'present',
 }
 
-vscode_extension { 'Borke.puppet':
+vscode_extension { 'jpogran.puppet':
   ensure  => 'absent',
   require => Class['vscode'],
 }

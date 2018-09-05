@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-def vscode_extension(params = {})
+def vscode_extension_factory(params = {})
   defaults = {
     ensure: :present,
     extension_name: 'ms-vscode.PowerShell',
@@ -9,7 +9,7 @@ def vscode_extension(params = {})
 end
 
 describe Puppet::Type.type(:vscode_extension) do
-  subject { vscode_extension }
+  subject(:vscode_extension) { vscode_extension_factory }
 
   describe 'parameter :extension_name' do
     it 'is a parameter' do
@@ -17,7 +17,7 @@ describe Puppet::Type.type(:vscode_extension) do
     end
 
     it 'is the namevar' do
-      expect(subject.parameters[:extension_name]).to be_isnamevar
+      expect(vscode_extension.parameters[:extension_name]).to be_isnamevar
     end
 
     it 'has documentation' do
@@ -26,26 +26,26 @@ describe Puppet::Type.type(:vscode_extension) do
 
     it 'cannot be set to nil' do
       expect {
-        subject[:extension_name] = nil
+        vscode_extension[:extension_name] = nil
       }.to raise_error(Puppet::Error, %r{Got nil value for extension_name})
     end
     # This protects against
     # vscode_extension{ 's': ensure => present, extension_name => '', }
     it 'cannot be set to an empty string' do
       expect {
-        subject[:extension_name] = ''
+        vscode_extension[:extension_name] = ''
       }.to raise_error(Puppet::Error, %r{A non-empty extension_name must})
     end
 
     it 'can be set to a value following the (publisher name).(extension name) pattern' do
       expect {
-        subject[:extension_name] = 'ms-vscode.PowerShell'
+        vscode_extension[:extension_name] = 'ms-vscode.PowerShell'
       }.not_to raise_error
     end
 
     it 'cannot be set to a value not following the (publisher name).(extension name) pattern' do
       expect {
-        subject[:extension_name] = 'invalid-vscode-extension-name'
+        vscode_extension[:extension_name] = 'invalid-vscode-extension-name'
       }.to raise_error(Puppet::Error, %r{#{Regexp.escape('Extension names must following the (publisher name).(extension name) pattern')}})
     end
   end
@@ -62,7 +62,7 @@ describe Puppet::Type.type(:vscode_extension) do
     [:present, :installed, :absent].each do |ensure_value|
       it "can set be set to #{ensure_value}" do
         expect {
-          subject[:ensure] = ensure_value
+          vscode_extension[:ensure] = ensure_value
         }.not_to raise_error
       end
     end
