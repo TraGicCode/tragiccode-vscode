@@ -1,8 +1,14 @@
 require 'facter'
 
 Facter.add(:appdata) do
-  confine kernel: :windows
   setcode do
-    ENV['APPDATA']
+    case Facter.value(:kernel)
+    when 'windows'
+      ENV.fetch('APPDATA', nil)
+    when 'darwin'
+      File.join(ENV.fetch('HOME', nil), 'Library', 'Application Support')
+    else
+      File.join(ENV.fetch('HOME', nil), '.config')
+    end
   end
 end

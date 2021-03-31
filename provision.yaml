@@ -1,0 +1,9 @@
+---
+default:
+  provisioner: docker
+  images: ['litmusimage/ubuntu:20.04']
+docker:
+  provisioner: docker
+  images: 
+    - 'litmusimage/centos:8'
+    - 'litmusimage/ubuntu:20.04'

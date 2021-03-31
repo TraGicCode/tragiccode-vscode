@@ -11,12 +11,12 @@ describe 'vscode::config' do
         it { is_expected.to contain_class('vscode') }
         it { is_expected.to contain_class('vscode::config') }
 
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User').with_ensure('directory') }
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code').with_ensure('directory') }
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with_ensure('file') }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code').with_ensure('directory') }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code').with_ensure('directory') }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code/User/settings.json').with_ensure('file') }
 
         it {
-          is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with(
+          is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code/User/settings.json').with(
             ensure: 'file',
           ).with_content(%r{// Managed by Puppet! Changes made manually may be lost.}).with_content(%r{"workbench\.iconTheme": ""}).with_content(%r{"workbench\.colorTheme": ""})
         }
@@ -29,7 +29,7 @@ describe 'vscode::config' do
           }
         end
 
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with(ensure: 'file').with_content(%r{"workbench\.iconTheme": "vs-minimal"}) }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code/User/settings.json').with(ensure: 'file').with_content(%r{"workbench\.iconTheme": "vs-minimal"}) }
       end
 
       context 'with icon_theme => vs-seti' do
@@ -39,7 +39,7 @@ describe 'vscode::config' do
           }
         end
 
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with(ensure: 'file').with_content(%r{"workbench\.iconTheme": "vs-seti"}) }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code/User/settings.json').with(ensure: 'file').with_content(%r{"workbench\.iconTheme": "vs-seti"}) }
       end
 
       context 'with color_theme => Monokai Dimmed' do
@@ -49,7 +49,7 @@ describe 'vscode::config' do
           }
         end
 
-        it { is_expected.to contain_file('C:\Users\tragiccode\AppData\Roaming\Code\User\settings.json').with(ensure: 'file').with_content(%r{"workbench\.colorTheme": "Monokai Dimmed"}) }
+        it { is_expected.to contain_file('/C/Users/tragiccode/AppData/Roaming/Code/User/settings.json').with(ensure: 'file').with_content(%r{"workbench\.colorTheme": "Monokai Dimmed"}) }
       end
     end
   end

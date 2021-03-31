@@ -1,66 +1,90 @@
-# Class: vscode::install
-#
-#
 class vscode::install(
-  Enum['present', 'installed', 'absent'] $package_ensure = $::vscode::package_ensure,
-  String $package_name = $::vscode::package_name,
-  String $vscode_download_url = $::vscode::vscode_download_url,
-  Stdlib::Absolutepath $vscode_download_absolute_path = $::vscode::vscode_download_absolute_path,
-  Boolean $create_desktop_icon = $::vscode::create_desktop_icon,
-  Boolean $create_quick_launch_icon = $::vscode::create_quick_launch_icon,
-  Boolean $create_context_menu_files = $::vscode::create_context_menu_files,
-  Boolean $create_context_menu_folders = $::vscode::create_context_menu_folders,
-  Boolean $add_to_path = $::vscode::add_to_path,
-) inherits vscode {
+  Boolean $manage_package = $::vscode::manage_package,
+  Boolean $manage_repo = $::vscode::manage_repo,
+  Stdlib::HttpUrl $package_repo_url = $::vscode::package_repo_url,
+  Enum['present', 'absent'] $package_ensure = present,
+  Optional[Stdlib::HttpUrl] $package_source_url = undef,
+) {
+  case $facts['os']['family'] {
+    'RedHat': {
+      yumrepo { 'vscode.repo':
+        ensure   => $package_ensure,
+        enabled  => 1,
+        descr    => 'VSCode repo',
+        baseurl  => $package_repo_url,
+        gpgcheck => 1,
+        gpgkey   => 'https://packages.microsoft.com/keys/microsoft.asc',
+      }
 
-  $file_ensure = $package_ensure ? {
-    'installed' => 'file',
-    'present'   => 'file',
-    default     => 'absent',
-  }
+      package { 'code':
+        ensure  => $package_ensure,
+        require => [
+          Yumrepo['vscode.repo'],
+        ],
+      }
+    }
+    'Darwin': {
+      archive { '/tmp/VSCode_universal.zip':
+        ensure => $package_ensure,
+        extract => true,
+        cleanup => true,
+        extract_path => '/Applications',
+        creates => '/Applications/Visual Studio Code.app',
+        source => $package_source_url,
+      }
+    }
 
-  file { $vscode_download_absolute_path:
-    ensure => $file_ensure,
-    source => $vscode_download_url,
-  }
+    'Debian': {
+      archive{'Download Microsoft VS Code gpg key':
+        ensure  => $package_ensure,
+        path    => '/tmp/microsoft.asc',
+        source  => 'https://packages.microsoft.com/keys/microsoft.asc',
+        creates => '/etc/apt/trusted.gpg.d/microsoft.gpg',
+        notify  => Exec['create microsoft.gpg']
+      }
 
-  $_string_create_desktop_icon = $create_desktop_icon ? {
-    false   => '!desktopicon',
-    default => 'desktopicon',
-  }
+      exec { 'create microsoft.gpg':
+        command => 'gpg --dearmor -o /etc/apt/trusted.gpg.d/microsoft.gpg /tmp/microsoft.asc',
+        path    => ['/usr/bin', '/usr/sbin'],
+        creates => '/etc/apt/trusted.gpg.d/microsoft.gpg',
+        refreshonly => true,
+      }
 
-  $_string_create_quick_launch_icon = $create_quick_launch_icon ? {
-    false   => '!quicklaunchicon',
-    default => 'quicklaunchicon',
-  }
+      apt::source { 'vscode':
+        ensure   => $package_ensure,
+        comment  => 'This is the official VSCode repository',
+        location => $package_repo_url,
+        release  => 'stable',
+        repos    => 'main',
+        include  => {
+          'deb' => true,
+        },
+      }
 
-  $_string_create_context_menu_files = $create_context_menu_files ? {
-    false   => '!addcontextmenufiles',
-    default => 'addcontextmenufiles',
-  }
+      package { 'code':
+        ensure  => $package_ensure,
+        require => [
+          Apt::Source['vscode'],
+        ],
+      }
+    }
 
-  $_string_create_context_menu_folders = $create_context_menu_folders ? {
-    false   => '!addcontextmenufolders',
-    default => 'addcontextmenufolders',
-  }
+    'Windows': {
+      file { '/c/windows/temp/VSCode.exe':
+        ensure => $package_ensure,
+        source => $package_source_url,
+      }
 
+      package { 'code':
+        ensure          => $package_ensure,
+        source          => '/c/windows/temp/VSCode.exe',
+        install_options => ['/verysilent', { '/log' => 'C:\\VSCode-install.log', }],
+        require         => File['/c/windows/temp/VSCode.exe'],
+      }
+    }
 
-  $_string_add_to_path = $add_to_path ? {
-    false   => '!addtopath',
-    default => 'addtopath',
-  }
-
-  package { $package_name:
-    ensure            => $package_ensure,
-    source            => $vscode_download_absolute_path,
-    install_options   => [
-      '/verysilent',
-      # lint:ignore:140chars
-      "/mergetasks=!runCode,${_string_create_desktop_icon},${_string_create_quick_launch_icon},${_string_create_context_menu_files},${_string_create_context_menu_folders},${_string_add_to_path}",
-      # lint:endignore
-      { '/log' => 'C:\\VSCodeSetup-install.log', }
-    ],
-    uninstall_options => ['/verysilent'],
-    require           => File[$vscode_download_absolute_path],
+    default: {
+      notify { 'OS not supported': }
+    }
   }
 }

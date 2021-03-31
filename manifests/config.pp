@@ -2,23 +2,28 @@
 #
 #
 class vscode::config(
-  Stdlib::Absolutepath $vscode_user_code_directory = $::vscode::vscode_user_code_directory,
-  Stdlib::Absolutepath $vscode_user_user_directory = $::vscode::vscode_user_user_directory,
-  Stdlib::Absolutepath $vscode_user_settings_file_absolute_path = $::vscode::vscode_user_settings_file_absolute_path,
-  Optional[Enum['vs-minimal', 'vs-seti']] $icon_theme = $::vscode::icon_theme,
-  Optional[String] $color_theme = $::vscode::color_theme,
+  Stdlib::Absolutepath $vscode_code_dir = $::vscode::code_dir,
+  Stdlib::Absolutepath $vscode_code_user_dir = $::vscode::code_user_dir,
+  Stdlib::Absolutepath $vscode_settings_file = $::vscode::code_settings_file,
 ) inherits vscode {
 
-  file { [$vscode_user_code_directory, $vscode_user_user_directory]:
-    ensure => 'directory',
-  }
+  # file { [$vscode_code_dir, $vscode_code_user_dir]:
+  #   ensure => 'directory',
+  # }
 
-  file { $vscode_user_settings_file_absolute_path:
-    ensure  => 'file',
-    content => regsubst(epp("${module_name}/settings.json.epp", {
-      'icon_theme'  => $icon_theme,
-      'color_theme' => $color_theme,
-    }), '\n', "\r\n", 'EMG'),
-  }
+  # file{$vscode_settings_file:
+  #   ensure => present,
+  #   replace => false,
+  #   content => {}.to_json
+  # }
 
+  # augeas { "groups_array" :
+  #   incl => $vscode_settings_file ,
+  #   lens => 'Json.lns',
+  #   changes => [
+  #     "set dict/entry[last()+1] 'groups'",
+  #   ],
+  #   onlyif => "match dict/entry[*][.='groups'] size == 0" ,
+  #   require => File[$vscode_settings_file] ,
+  # } 
 }
