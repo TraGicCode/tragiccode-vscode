@@ -24,7 +24,7 @@ Puppet::Type.newtype(:vscode_extension) do
     validate do |value|
       raise('A non-empty extension_name must be specified.') if value.empty? || value.nil?
       # https://github.com/Microsoft/vscode-generator-code/blob/master/generators/app/validator.js
-      raise('Extension names must following the (publisher name).(extension name) pattern') if value !~ %r{^[a-z0-9][a-z0-9\-]*\.[a-z0-9][a-z0-9\-]*$}i
+      raise('Extension names must following the (publisher name).(extension name) pattern') unless %r{^[a-z0-9][a-z0-9\-]*\.[a-z0-9][a-z0-9\-]*$}i.match?(value)
     end
   end
 end
