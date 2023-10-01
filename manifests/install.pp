@@ -1,18 +1,17 @@
 # Class: vscode::install
 #
 #
-class vscode::install(
-  Enum['present', 'installed', 'absent'] $package_ensure = $::vscode::package_ensure,
-  String $package_name = $::vscode::package_name,
-  String $vscode_download_url = $::vscode::vscode_download_url,
-  Stdlib::Absolutepath $vscode_download_absolute_path = $::vscode::vscode_download_absolute_path,
-  Boolean $create_desktop_icon = $::vscode::create_desktop_icon,
-  Boolean $create_quick_launch_icon = $::vscode::create_quick_launch_icon,
-  Boolean $create_context_menu_files = $::vscode::create_context_menu_files,
-  Boolean $create_context_menu_folders = $::vscode::create_context_menu_folders,
-  Boolean $add_to_path = $::vscode::add_to_path,
+class vscode::install (
+  Enum['present', 'installed', 'absent'] $package_ensure = $vscode::package_ensure,
+  String $package_name = $vscode::package_name,
+  String $vscode_download_url = $vscode::vscode_download_url,
+  Stdlib::Absolutepath $vscode_download_absolute_path = $vscode::vscode_download_absolute_path,
+  Boolean $create_desktop_icon = $vscode::create_desktop_icon,
+  Boolean $create_quick_launch_icon = $vscode::create_quick_launch_icon,
+  Boolean $create_context_menu_files = $vscode::create_context_menu_files,
+  Boolean $create_context_menu_folders = $vscode::create_context_menu_folders,
+  Boolean $add_to_path = $vscode::add_to_path,
 ) inherits vscode {
-
   $file_ensure = $package_ensure ? {
     'installed' => 'file',
     'present'   => 'file',
@@ -44,7 +43,6 @@ class vscode::install(
     default => 'addcontextmenufolders',
   }
 
-
   $_string_add_to_path = $add_to_path ? {
     false   => '!addtopath',
     default => 'addtopath',
@@ -58,7 +56,7 @@ class vscode::install(
       # lint:ignore:140chars
       "/mergetasks=!runCode,${_string_create_desktop_icon},${_string_create_quick_launch_icon},${_string_create_context_menu_files},${_string_create_context_menu_folders},${_string_add_to_path}",
       # lint:endignore
-      { '/log' => 'C:\\VSCodeSetup-install.log', }
+      { '/log' => 'C:\\VSCodeSetup-install.log', },
     ],
     uninstall_options => ['/verysilent'],
     require           => File[$vscode_download_absolute_path],
