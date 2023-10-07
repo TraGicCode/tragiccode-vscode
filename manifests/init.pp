@@ -27,7 +27,7 @@
 #
 # Copyright 2017
 #
-class vscode(
+class vscode (
   Enum['present', 'installed', 'absent'] $package_ensure = $vscode::params::package_ensure,
   String $package_name = $vscode::params::package_name,
   String $vscode_download_url = $vscode::params::vscode_download_url,
@@ -44,11 +44,9 @@ class vscode(
   Optional[Enum['vs-minimal', 'vs-seti']] $icon_theme = $vscode::params::icon_theme,
   Optional[String] $color_theme = $vscode::params::color_theme,
 ) inherits vscode::params {
-
   contain vscode::install
   contain vscode::config
 
   Class['vscode::install']
   -> Class['vscode::config']
-
 }
